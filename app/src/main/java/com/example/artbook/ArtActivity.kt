@@ -1,8 +1,13 @@
 package com.example.artbook
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.example.artbook.databinding.ActivityArtBinding
 
 class ArtActivity : AppCompatActivity() {
@@ -11,7 +16,6 @@ class ArtActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_art)
         binding = ActivityArtBinding.inflate(layoutInflater)
         var view = binding.root
         setContentView(view)
@@ -23,5 +27,16 @@ class ArtActivity : AppCompatActivity() {
 
     fun selectimage(view: View) {
 
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+
+        } else {
+            val intenttoGallery =
+                Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+
+        }
     }
 }
